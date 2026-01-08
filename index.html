@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Skunk Rogers | Vigilancia Digital</title>
+    <title>SKUNK ROGERS | Vigilancia Digital</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -22,6 +22,24 @@
         }
         .mono { font-family: 'JetBrains Mono', monospace; }
         
+        /* Logo protection layers */
+        .logo-shield {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            background: rgba(0,0,0,0);
+            cursor: default;
+        }
+
+        .logo-container img {
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
         .scanline {
             width: 100%;
             height: 100px;
@@ -104,16 +122,24 @@
         section { scroll-margin-top: 80px; }
     </style>
 </head>
-<body class="p-0 m-0">
+<body class="p-0 m-0" oncontextmenu="return false;">
     <div class="scanline"></div>
 
     <header class="border-b border-red-900 bg-black/90 backdrop-blur-md sticky top-0 z-[100] p-4">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-2 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-                <div class="w-6 h-6 border-2 border-red-600 rounded-full flex items-center justify-center">
-                    <div class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></div>
+            <div class="flex items-center space-x-4">
+                <!-- Locked Custom Logo Section -->
+                <div class="relative logo-container w-10 h-10 md:w-12 md:h-12 border border-zinc-800 rounded flex items-center justify-center overflow-hidden bg-zinc-950">
+                    <div class="logo-shield" oncontextmenu="event.preventDefault();"></div>
+                    <img src="https://i.postimg.cc/C5p9VhBT/lug.png" alt="Logo Protegido" class="w-full h-full object-cover">
                 </div>
-                <h1 class="text-lg font-black tracking-tighter uppercase italic leading-none">SKUNK <span class="text-red-600">ROGERS</span></h1>
+
+                <div class="flex items-center space-x-2 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                    <div class="w-5 h-5 border-2 border-red-600 rounded-full flex items-center justify-center">
+                        <div class="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse"></div>
+                    </div>
+                 <h1 class="text-lg font-black tracking-tighter uppercase italic leading-none">SKUNK <span class="text-red-600">ROGERS</span></h1>
+                </div>
             </div>
             
             <div class="flex items-center space-x-3 md:space-x-6">
@@ -124,6 +150,7 @@
                     <a href="#pricing" class="text-red-500 font-black underline underline-offset-4" data-i18n="nav_pricing">Auditoría</a>
                 </nav>
 
+                <!-- Language Selector with Portuguese -->
                 <div class="relative">
                     <button id="lang-btn" class="flex items-center space-x-2 bg-zinc-900 border border-zinc-700 px-2 py-1 md:px-3 md:py-1 rounded hover:border-red-600 transition">
                         <span id="current-flag">🇪🇸</span>
@@ -133,14 +160,13 @@
                         <button onclick="changeLang('es')" class="w-full flex items-center space-x-3 px-4 py-3 hover:bg-red-600 transition text-xs"><span>🇪🇸</span> <span>Español</span></button>
                         <button onclick="changeLang('en')" class="w-full flex items-center space-x-3 px-4 py-3 hover:bg-red-600 transition text-xs"><span>🇺🇸</span> <span>English</span></button>
                         <button onclick="changeLang('pt')" class="w-full flex items-center space-x-3 px-4 py-3 hover:bg-red-600 transition text-xs"><span>🇧🇷</span> <span>Português</span></button>
-                        <button onclick="changeLang('de')" class="w-full flex items-center space-x-3 px-4 py-3 hover:bg-red-600 transition text-xs"><span>🇩🇪</span> <span>Deutsch</span></button>
-                        <button onclick="changeLang('ru')" class="w-full flex items-center space-x-3 px-4 py-3 hover:bg-red-600 transition text-xs"><span>🇷🇺</span> <span>Русский</span></button>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="min-h-[90vh] flex flex-col items-center justify-center text-center px-6 py-12">
         <div class="eye-container mb-6 md:mb-10">
             <div class="eye-outer">
@@ -154,17 +180,18 @@
             "Lo que publicas hoy, es el expediente que usaremos mañana."
         </p>
         <div class="flex flex-col sm:flex-row gap-4 w-full max-w-xs sm:max-w-none justify-center">
-            <button onclick="scrollToId('risks')" class="w-full sm:w-auto px-8 py-4 bg-red-600 font-bold uppercase tracking-widest hover:bg-red-700 transition text-[10px]" data-i18n="btn_risks">Ver Vulnerabilidades</button>
-            <button onclick="scrollToId('scanner')" class="w-full sm:w-auto px-8 py-4 border border-white font-bold uppercase tracking-widest hover:bg-white hover:text-black transition text-[10px]" data-i18n="btn_scanner">Consola de Vigilancia</button>
+            <button onclick="scrollToId('risks')" class="w-full sm:w-auto px-8 py-4 bg-red-600 font-bold uppercase tracking-widest hover:bg-red-700 transition text-[10px]" data-i18n="btn_risks">Ver Riesgos</button>
+            <button onclick="scrollToId('scanner')" class="w-full sm:w-auto px-8 py-4 border border-white font-bold uppercase tracking-widest hover:bg-white hover:text-black transition text-[10px]" data-i18n="btn_scanner">Terminal</button>
         </div>
     </section>
 
+    <!-- Who We Are -->
     <section id="about" class="py-16 md:py-24 bg-zinc-900/40">
         <div class="container mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
             <div class="terminal-box p-6 md:p-8 order-2 md:order-1">
                 <h3 class="mono text-red-500 mb-4 text-lg md:text-xl tracking-tighter" data-i18n="about_title">> ¿QUIÉNES SOMOS?</h3>
                 <div class="space-y-4 text-sm md:text-base text-gray-300 leading-relaxed">
-                    <p data-i18n="about_p1">Somos **OSINT Group**. No somos hackers, somos recolectores de inteligencia de fuentes abiertas.</p>
+                    <p data-i18n="about_p1">Somos Skunk Rogers. No somos hackers, somos recolectores de inteligencia de fuentes abiertas.</p>
                     <p data-i18n="about_p2">Nuestra misión es demostrar que en la web moderna, la privacidad es un mito.</p>
                 </div>
             </div>
@@ -177,6 +204,7 @@
         </div>
     </section>
 
+    <!-- Risks -->
     <section id="risks" class="py-16 md:py-24 container mx-auto px-6">
         <h3 class="text-2xl md:text-4xl font-black uppercase mb-10 text-center" data-i18n="risks_section_title">Tus Huellas, <span class="text-red-600">Nuestros Datos</span></h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -198,12 +226,13 @@
                 <div class="text-red-600 mb-4 group-hover:scale-110 transition-transform">
                     <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75-2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
                 </div>
-                <h4 class="text-lg font-bold mb-2 uppercase" data-i18n="risk3_title">Psicología</h4>
+                <h4 class="text-lg font-bold mb-2 uppercase" data-i18n="risk3_title">Ideología</h4>
                 <p class="text-xs text-gray-500 leading-relaxed" data-i18n="risk3_desc">Tus gustos personales y opiniones facilitan ataques de ingeniería social.</p>
             </div>
         </div>
     </section>
 
+    <!-- Terminal -->
     <section id="scanner" class="py-16 md:py-24 bg-zinc-950 px-4">
         <div class="max-w-4xl mx-auto">
             <h3 class="text-2xl md:text-3xl font-black uppercase mb-6 text-center" data-i18n="console_title">CONSOLA VIGILANCIA</h3>
@@ -223,31 +252,33 @@
         </div>
     </section>
 
+    <!-- Pricing -->
     <section id="pricing" class="py-16 md:py-24 px-6 bg-black">
         <div class="container mx-auto">
             <div class="text-center mb-12">
                 <h3 class="text-3xl md:text-5xl font-black uppercase italic" data-i18n="pricing_title">Auditorías</h3>
                 <p class="text-gray-500 mt-2 uppercase tracking-widest text-[10px] font-bold" data-i18n="pricing_subtitle">¿Qué tanto sabemos de ti?</p>
                 
-                <!-- Nota de Pago en Crypto -->
                 <div class="mt-6 inline-flex items-center space-x-2 bg-zinc-900 border border-blue-900/30 px-4 py-2 rounded-full">
                     <svg class="w-4 h-4 text-[#0088cc]" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12s5.373 12 12 12zM7.18 8.04c.14-.144.3-.23.49-.24.167-.013.344.027.527.132l4.22 2.43 4.22-2.43c.184-.105.36-.145.527-.133.19.01.35.096.49.24.145.148.22.344.225.568 0 .224-.07.447-.207.665l-5.1 8.8c-.167.288-.415.432-.743.432s-.576-.144-.743-.43l-5.105-8.8c-.138-.218-.207-.44-.207-.665.006-.224.082-.42.227-.568z"/>
                     </svg>
-                    <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-400">Solo aceptamos <span class="text-[#0088cc]">TON (The Open Network)</span></span>
+                    <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-400">Pagos exclusivamente en <span class="text-[#0088cc]">TON (The Open Network)</span></span>
                 </div>
             </div>
 
             <div class="flex flex-col lg:flex-row gap-6 items-stretch justify-center max-w-6xl mx-auto">
                 <div class="flex-1 bg-zinc-900/50 border border-zinc-800 p-8 flex flex-col hover:border-zinc-600 transition">
                     <h4 class="text-lg font-black uppercase mb-1" data-i18n="plan1_name">Básico</h4>
-                    <div class="text-3xl font-black mb-6">≈ 3 <span class="text-xs text-[#0088cc] font-bold">TON</span></div>
+                    <div class="text-3xl font-black mb-6">≈ 5 <span class="text-xs text-[#0088cc] font-bold">TON</span></div>
                     <ul class="text-gray-400 text-[11px] space-y-4 mb-8 flex-grow">
                         <li>• Google Dorks Analysis</li>
                         <li>• Social Media Visibility Check</li>
                         <li>• Basic Data Leak Search</li>
                     </ul>
-                    <button class="w-full py-3 bg-zinc-800 hover:bg-red-600 transition font-bold uppercase text-[10px] tracking-widest" data-i18n="buy_btn" onclick="sendAuditMail('Básico')">Solicitar</button>
+                    <a href="https://pay.oxapay.com/11627856" target="_blank" class="w-full py-3 bg-zinc-800 hover:bg-blue-600 transition font-bold uppercase text-[10px] tracking-widest text-center flex items-center justify-center space-x-2">
+                        <span>BUY</span>
+                    </a>
                 </div>
                 <div class="flex-1 bg-zinc-900 border-2 border-red-600 p-8 flex flex-col relative transform lg:scale-105 shadow-2xl z-10">
                     <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[9px] font-black px-4 py-1 uppercase tracking-tighter" data-i18n="plan_popular">RECOMENDADO</div>
@@ -257,9 +288,10 @@
                         <li>• Deep Web Records Scan</li>
                         <li>• Metadata Image Extraction</li>
                         <li>• Personal Vulnerability Map</li>
-                        <li>• Psychological Profiling</li>
                     </ul>
-                    <button class="w-full py-3 bg-red-600 hover:bg-red-700 transition font-bold uppercase text-[10px] tracking-widest" data-i18n="buy_btn" onclick="sendAuditMail('Perfil Completo')">Solicitar</button>
+                    <a href="https://pay.oxapay.com/10741763" target="_blank" class="w-full py-3 bg-red-600 hover:bg-red-700 transition font-bold uppercase text-[10px] tracking-widest text-center flex items-center justify-center space-x-2">
+                        <span>BUY</span>
+                    </a>
                 </div>
                 <div class="flex-1 bg-zinc-900/50 border border-zinc-800 p-8 flex flex-col hover:border-zinc-600 transition">
                     <h4 class="text-lg font-black uppercase mb-1" data-i18n="plan3_name">Modo Sombra</h4>
@@ -268,68 +300,85 @@
                         <li>• Digital Footprint Wipe</li>
                         <li>• Legal Takedown Support</li>
                         <li>• 24/7 Identity Shield</li>
-                        <li>• Advanced Privacy Training</li>
                     </ul>
-                    <button class="w-full py-3 bg-zinc-800 hover:bg-red-600 transition font-bold uppercase text-[10px] tracking-widest" data-i18n="buy_btn" onclick="sendAuditMail('Modo Sombra')">Solicitar</button>
+                    <a href="https://pay.oxapay.com/11627856" target="_blank" class="w-full py-3 bg-zinc-800 hover:bg-blue-600 transition font-bold uppercase text-[10px] tracking-widest text-center flex items-center justify-center space-x-2">
+                        <span>BUY</span>
+                    </a>
                 </div>
             </div>
-            
-            <p class="text-center text-[8px] text-zinc-600 mt-8 uppercase tracking-widest font-mono">
-                * Pagos procesados vía Smart Contract en la blockchain de TON. Anonimato garantizado.
-            </p>
         </div>
     </section>
 
     <footer class="py-12 border-t border-zinc-900 bg-black text-center text-[9px] text-zinc-600 uppercase tracking-[0.2em] px-4">
         <p data-i18n="footer_slogan">EL GRAN HERMANO NUNCA DUERME</p>
-        <p class="mt-2">&copy; 2026 OSINT GROUP - NO PRIVACY GRANTED</p>
+        <p class="mt-2">&copy; 2026 SKUNK GROUP - NO PRIVACY GRANTED</p>
     </footer>
 
     <script>
+        // Additional protection layer
+        document.querySelectorAll('.logo-shield').forEach(shield => {
+            shield.addEventListener('dragstart', (e) => e.preventDefault());
+            shield.addEventListener('mousedown', (e) => e.preventDefault());
+        });
+
         const translations = {
             es: {
                 nav_about: "El Grupo", nav_risks: "Riesgos", nav_scanner: "Vigilancia", nav_pricing: "Auditoría",
                 hero_title: "El Gran Hermano <br><span class='text-red-600'>te está observando</span>",
                 hero_subtitle: "\"Lo que publicas hoy, es el expediente que usaremos mañana.\"",
-                btn_risks: "Ver Riesgos", btn_scanner: "Terminal OSINT",
+                btn_risks: "Ver Riesgos", btn_scanner: "Terminal",
                 about_title: "> ¿QUIÉNES SOMOS?",
-                about_p1: "Somos **OSINT Group**. No somos hackers tradicionales, somos recolectores de inteligencia global.",
-                about_p2: "Nuestra misión es demostrar que en el mundo hiperconectado, el anonimato es un lujo inexistente.",
-                risks_section_title: "Huellas <span class='text-red-600'>Digitales</span>",
-                risk1_title: "Geolocalización", risk1_desc: "Metadatos en tus archivos exponen cada paso que das.",
-                risk2_title: "Identidad", risk2_desc: "Conectamos cuentas olvidadas para crear tu perfil 360.",
-                risk3_title: "Psicología", risk3_desc: "Tus patrones de red revelan tus debilidades explotables.",
+                about_p1: "Somos Skunk Rogers. No somos hackers convencionales, somos analistas de inteligencia digital.",
+                about_p2: "Nuestra misión es demostrar que en el mundo moderno, el anonimato ha dejado de existir.",
+                risks_section_title: "Tus Huellas, <span class='text-red-600'>Nuestros Datos</span>",
+                risk1_title: "Geolocalización", risk1_desc: "Metadatos en tus fotos revelan tu rutina diaria y ubicaciones precisas.",
+                risk2_title: "Identidad", risk2_desc: "Unimos tus perfiles de redes sociales, correos y foros antiguos en segundos.",
+                risk3_title: "Idiología", risk3_desc: "Tus gustos personales y opiniones facilitan ataques de ingeniería social.",
                 console_title: "CONSOLA DE VIGILANCIA",
                 pricing_title: "Auditorías de <span class='text-red-600'>Privacidad</span>",
-                pricing_subtitle: "¿Qué tan expuesto estás?",
+                pricing_subtitle: "¿Qué tanto sabemos de ti?",
                 plan1_name: "Básico", plan2_name: "Perfil Completo", plan3_name: "Modo Sombra",
-                buy_btn: "Solicitar", plan_popular: "RECOMENDADO", footer_slogan: "EL GRAN HERMANO NUNCA DUERME",
-                mail_subject: "Solicitud OSINT: ",
-                mail_body: "Hola,\n\nQuiero auditar mi perfil (Pago vía TON): "
+                plan_popular: "RECOMENDADO", footer_slogan: "EL GRAN HERMANO NUNCA DUERME"
             },
             en: {
                 nav_about: "The Group", nav_risks: "Risks", nav_scanner: "Surveillance", nav_pricing: "Audits",
                 hero_title: "Big Brother <br><span class='text-red-600'>is watching you</span>",
                 hero_subtitle: "\"What you post today is the record we use tomorrow.\"",
-                btn_risks: "View Risks", btn_scanner: "OSINT Console",
+                btn_risks: "View Risks", btn_scanner: "Terminal",
                 about_title: "> WHO ARE WE?",
-                about_p1: "We are **OSINT Group**. Intelligence collectors proving that privacy is dead.",
+                about_p1: "We are Skunk Rogers. Intelligence collectors proving that privacy is dead.",
                 about_p2: "Our mission: showing you exactly how much the world knows about you.",
                 risks_section_title: "Digital <span class='text-red-600'>Footprints</span>",
                 risk1_title: "Geolocation", risk1_desc: "File metadata reveals your daily routine and locations.",
                 risk2_title: "Identity", risk2_desc: "Linking old accounts to build a full persona profile.",
-                risk3_title: "Psychology", risk3_desc: "Your patterns expose exploitable behavioral traits.",
+                risk3_title: "Ideology", risk3_desc: "Your patterns expose exploitable behavioral traits.",
                 console_title: "SURVEILLANCE CONSOLE",
                 pricing_title: "Privacy <span class='text-red-600'>Audits</span>",
                 pricing_subtitle: "How exposed are you?",
                 plan1_name: "Basic Scan", plan2_name: "Full Profiling", plan3_name: "Shadow Mode",
-                buy_btn: "Request", plan_popular: "RECOMMENDED", footer_slogan: "BIG BROTHER NEVER SLEEPS",
-                mail_subject: "OSINT Request: ",
-                mail_body: "Hello,\n\nI want to audit my profile (Payment via TON): "
+                plan_popular: "RECOMMENDED", footer_slogan: "BIG BROTHER NEVER SLEEPS"
+            },
+            pt: {
+                nav_about: "O Grupo", nav_risks: "Riscos", nav_scanner: "Vigilância", nav_pricing: "Auditoria",
+                hero_title: "O Grande Irmão <br><span class='text-red-600'>está te observando</span>",
+                hero_subtitle: "\"O que você publica hoje, é o dossiê que usaremos amanhã.\"",
+                btn_risks: "Ver Riscos", btn_scanner: "Terminal",
+                about_title: "> QUEM SOMOS?",
+                about_p1: "Somos o Skunk Rogers. Não somos hackers comuns, somos analistas de inteligência digital.",
+                about_p2: "Nossa missão é provar que no mundo moderno, o anonimato deixou de existir.",
+                risks_section_title: "Suas Pegadas, <span class='text-red-600'>Nossos Dados</span>",
+                risk1_title: "Geolocalização", risk1_desc: "Metadados em suas fotos revelam sua rotina diária e localizações precisas.",
+                risk2_title: "Identidade", risk2_desc: "Unimos seus perfis de redes sociais, e-mails e fóruns antigos em segundos.",
+                risk3_title: "Psicologia", risk3_desc: "Seus gostos e opiniões facilitam ataques de engenharia social.",
+                console_title: "CONSOLE DE VIGILÂNCIA",
+                pricing_title: "Auditorias de <span class='text-red-600'>Privacidade</span>",
+                pricing_subtitle: "O quanto sabemos sobre você?",
+                plan1_name: "Básico", plan2_name: "Perfil Completo", plan3_name: "Modo Sombra",
+                plan_popular: "RECOMENDADO", footer_slogan: "O GRANDE IRMÃO NUNCA DORME"
             }
         };
 
-        const flags = { es: "🇪🇸", en: "🇺🇸" };
+        const flags = { es: "🇪🇸", en: "🇺🇸", pt: "🇧🇷" };
         let currentLang = 'es';
 
         function changeLang(lang) {
@@ -358,13 +407,6 @@
         function scrollToId(id) {
             const target = document.getElementById(id);
             if(target) target.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function sendAuditMail(planName) {
-            const t = translations[currentLang];
-            const subject = encodeURIComponent(`${t.mail_subject}${planName}`);
-            const body = encodeURIComponent(`${t.mail_body}${planName}`);
-            window.location.href = `mailto:audits@osintgroup.net?subject=${subject}&body=${body}`;
         }
 
         const terminalContent = document.getElementById('terminal-content');
@@ -396,7 +438,6 @@
                         await new Promise(r => setTimeout(r, 60));
                     }
                     await new Promise(r => setTimeout(r, line.delay || 800));
-                    
                     if(line.text === 'clear') {
                         terminalContent.innerHTML = `<p><span class="text-blue-400">osint@gateway</span>:<span class="text-zinc-500">~</span>$ <span id="typing-line"></span><span class="cursor"></span></p>`;
                     } else {
@@ -418,7 +459,6 @@
                 await new Promise(r => setTimeout(r, 400));
             }
         }
-
         window.onload = terminalLoop;
     </script>
 </body>
